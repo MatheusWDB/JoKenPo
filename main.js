@@ -1,58 +1,72 @@
-function hideButtons(clickedId) {
-    const buttonss = document.querySelector('.buttons');
-    buttonss.remove();
+function ocultarBotoes(escolhaDoJogador) {
+    // pega as tags com classes buttons e button.
+    const divBotoes = document.querySelector('.buttons');
+    const botoes = document.querySelectorAll('.button');
 
-    const buttons = document.querySelectorAll('.button');
+    // remove as tags com classe buttons.
+    divBotoes.remove();
 
-    buttons.forEach(button => {
-        button.style.display = 'none';
-        button.disabled = true;
-    });
+    // chama a função gerarResultado passando a escolhaDoJogador.
+    gerarResultado(escolhaDoJogador)
+}
 
-    const clickedImage = document.createElement('img');
-    clickedImage.src = `img/${clickedId.charAt(0).toUpperCase() + clickedId.slice(1)}-Photoroom.png`;
-    clickedImage.alt = clickedId;
-    clickedImage.classList.add('img');
+function gerarResultado(escolhaDoJogador) {
+    // "escolhe" um valor aleatório entre pedra, papel ou tesoura.
+    const escolhaDaCPU = ['pedra', 'papel', 'tesoura'][Math.floor(Math.random() * 3)];
 
-    
-    const randomImageId = ['pedra', 'papel', 'tesoura'][Math.floor(Math.random() * 3)];
-    const randomImage = document.createElement('img');
-    randomImage.src = `img/${randomImageId.charAt(0).toUpperCase() + randomImageId.slice(1)}-Photoroom.png`;
-    randomImage.alt = randomImageId;
-    randomImage.classList.add('img');
+    // chama a função criarImagem passando a escolhaDoJogador ou escolhaDaCPU.
+    const imagemDoJogador = criarImagem(escolhaDoJogador);
+    const imagemDaCPU = criarImagem(escolhaDaCPU);
 
-    const player = document.createElement('div');
-    player.classList.add('result-img');
-    const playerP = document.createElement('p');
-    playerP.innerText = 'Jogador';
-    player.appendChild(playerP);
-    player.appendChild(clickedImage);
+    // chama a função criarDiv passando o texo e a imagemDoJogador ou a imagemDaCPU.
+    const divJogador = criarDiv('Jogador', imagemDoJogador);
+    const divCPU = criarDiv('Computador', imagemDaCPU);
 
-    const cpu = document.createElement('div')
-    cpu.classList.add('result-img');
-    const cpuP = document.createElement('p');
-    cpuP.innerText = 'Computador';
-    cpu.appendChild(cpuP);
-    cpu.appendChild(randomImage);
+    // cria uma tag span, adiciona a classe result e define divJogador e divCPU como tags filhas.
+    const spanResultado = document.createElement('span');
+    spanResultado.classList.add('result');
+    spanResultado.appendChild(divJogador);
+    spanResultado.appendChild(divCPU);
 
-    const span = document.createElement('span');
-    span.classList.add('result');
-    span.appendChild(player);
-    span.appendChild(cpu);
-
-
-    const container = document.querySelector('.container');
-    const h1 = document.getElementsByTagName('h1');
+    // modifica a tag h1 conforme o resultado da partida.
+    const tituloResultado = document.getElementsByTagName('h1');
     if (
-        (clickedId == 'pedra' && randomImageId == 'tesoura') ||
-        (clickedId == 'papel' && randomImageId == 'pedra') ||
-        (clickedId == 'tesoura' && randomImageId == 'papel')
+        (escolhaDoJogador == 'pedra' && escolhaDaCPU == 'tesoura') ||
+        (escolhaDoJogador == 'papel' && escolhaDaCPU == 'pedra') ||
+        (escolhaDoJogador == 'tesoura' && escolhaDaCPU == 'papel')
     ) {
-        h1[0].innerText = 'Você venceu!';
-    } else if (clickedId === randomImageId) {
-        h1[0].innerText = 'Empatou!';
+        tituloResultado[0].innerText = 'Você venceu!';
+    } else if (escolhaDoJogador === escolhaDaCPU) {
+        tituloResultado[0].innerText = 'Empatou!';
     } else {
-        h1[0].innerText = 'Você perdeu!';
+        tituloResultado[0].innerText = 'Você perdeu!';
     }
-    container.appendChild(span);
+
+    // pega as tags com classe container e adiciona o spanResultado como sua tag filha.
+    const corpoPrincipal = document.querySelector('.container');
+    corpoPrincipal.appendChild(spanResultado);
+}
+
+function criarImagem(escolha) {
+    // cria uma tag img, define o src como o caminho da imagem escolhida (o nome da imagem tem que corresponder), define o alt como sendo a escolha, adiciona a classe img e retorna a imagem.
+    const imagem = document.createElement('img');
+    imagem.src = `img/${escolha}.png`;
+    imagem.alt = escolha;
+    imagem.classList.add('img');
+    return imagem;
+}
+
+function criarDiv(texto, imagem) {
+    // cria uma taga div e adiciona a classe result-img.
+    const div = document.createElement('div');
+    div.classList.add('result-img');
+
+    // cria uma tag p e adiciona o texto a ela.
+    const p = document.createElement('p');
+    p.innerText = texto;
+
+    // define as tags p e imagem como filhas da tag div.
+    div.appendChild(p);
+    div.appendChild(imagem);
+    return div
 }
