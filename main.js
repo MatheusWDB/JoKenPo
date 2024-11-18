@@ -7,7 +7,7 @@ function ocultarBotoes(escolhaDoJogador) {
     divBotoes.remove();
 
     // chama a função gerarResultado passando a escolhaDoJogador.
-    gerarResultado(escolhaDoJogador)
+    gerarResultado(escolhaDoJogador);
 }
 
 function gerarResultado(escolhaDoJogador) {
@@ -68,21 +68,15 @@ function criarDiv(texto, imagem) {
     // define as tags p e imagem como filhas da tag div.
     div.appendChild(p);
     div.appendChild(imagem);
-    return div
+    return div;
 }
 
-// Array com os caminhos para os favicons
-const favicons = [
-    "img/pedra.png",
-    "img/papel.png",
-    "img/tesoura.png"
-];
-
-// Seleciona aleatoriamente um favicon
-const randomFavicon = favicons[Math.floor(Math.random() * favicons.length)];
-
-// Atualiza o favicon
+// chamado assim que a página é carregada
 document.addEventListener("DOMContentLoaded", () => {
+    // "escolhe" uma das imagens disponíveis
+    const imagemSelecionada = ["img/pedra.png", "img/papel.png", "img/tesoura.png"][Math.floor(Math.random() * 3)];
+
+    // define o href do link do favicon como sendo o caminho da imagemSelecionada
     const favicon = document.getElementById("favicon-dinamico");
-    favicon.href = randomFavicon;
+    favicon.href = imagemSelecionada;
 });
