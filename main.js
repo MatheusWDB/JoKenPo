@@ -70,3 +70,19 @@ function criarDiv(texto, imagem) {
     div.appendChild(imagem);
     return div
 }
+
+// Array com os caminhos para os favicons
+const favicons = [
+    "img/pedra.png",
+    "img/papel.png",
+    "img/tesoura.png"
+];
+
+// Seleciona aleatoriamente um favicon
+const randomFavicon = favicons[Math.floor(Math.random() * favicons.length)];
+
+// Atualiza o favicon
+document.addEventListener("DOMContentLoaded", () => {
+    const favicon = document.getElementById("favicon-dinamico");
+    favicon.href = randomFavicon;
+});
