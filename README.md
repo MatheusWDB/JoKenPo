@@ -9,6 +9,10 @@
 - Escolha aleatória da jogada do "computador".
 - Exibição do resultado (vitória, derrota ou empate).
 
+# Layout
+![JoKenPo](https://github.com/user-attachments/assets/7101e340-53f5-4ce0-8526-6447062edb6a)
+
+
 # Tecnologias utilizadas  
 ## Frontend
 - HTML
