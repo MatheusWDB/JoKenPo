@@ -10,7 +10,8 @@
 - Exibição do resultado (vitória, derrota ou empate).
 
 # Layout
-![JoKenPo](https://github.com/user-attachments/assets/7101e340-53f5-4ce0-8526-6447062edb6a)
+ ![0](https://github.com/user-attachments/assets/7101e340-53f5-4ce0-8526-6447062edb6a) 
+ ![1](https://github.com/user-attachments/assets/076799c0-6bcf-4382-a814-d8e739945d18) 
 
 
 # Tecnologias utilizadas  
